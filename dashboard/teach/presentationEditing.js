@@ -1,6 +1,5 @@
 (function() {
   var iN = 0;
-  var ospry = new Ospry('pk-prod-13wiw2db04xxtctvy3m1fmyg');
   window.initEditor = function() {
     $('#presentBtn').removeAttr("disabled");
     $('#mainDash').slideUp(300);
@@ -22,22 +21,23 @@
     $('#logoLink').attr("href", "/#");
   };
   window.editPresentation = function(isNew, arg2) {
+    var user = firebase.auth().currentUser;
     var key = "";
     var name = "";
     var currentSlide = "";
     var presData = {};
     if (isNew) {
       var nName = arg2;
-      var ref = fb.child("presentations/" + fb.getAuth().uid).push({
+      var presRef = firebase.database().ref("presentations/" + user.uid).push({
         name: nName
       });
-      var refSK = ref.child("slides").push({
+      presRef.child("slides").push({
         type: "text",
-        html: "<h1>An Excellent Slideshow</h1> <p>By " + fb.getAuth().google.displayName + "</p>"
-      }).key();
+        html: "<h1>An Excellent Slideshow</h1> <p>By " + user.displayName + "</p>"
+      });
       name = nName;
-      key = ref.key();
-      var ref2 = fb.child("users/" + fb.getAuth().uid + "/presentations");
+      key = presRef.key;
+      var ref2 = firebase.database().ref("users/" + user.uid + "/presentations");
       ref2.child(key).set({
         name: name
       });
@@ -45,7 +45,7 @@
       key = arg2;
     }
     var pushChanges = function(cB) {
-      fb.child("presentations/" + fb.getAuth().uid + "/" + key).set(presData, cB);
+      firebase.database().ref("presentations/" + user.uid + "/" + key).set(presData, cB);
     };
     var getSlide = function(sK, push) {
       if (push) {
@@ -86,12 +86,14 @@
       }
     });
     $('#presentBtn').attr("href", "./present#" + key);
-    var presentation = fb.child("presentations/" + fb.getAuth().uid + "/" + key);
+    var presentation = firebase.database().ref("presentations/" + user.uid + "/" + key);
     var renderList = function() {
       var sN2 = getSlideNumber(currentSlide) + 1;
       $('#sL').html("");
       for (var k in getSlideList()) {
-        $('#sL').append("<li class=\"list-item slideCl\" data-slide=\"i\">" + (currentSlide == k ? "<b>" : "") + ($(getSlide(k).html).filter('div').get(0) == undefined ? "Untitled" : $(getSlide(k).html).filter('div').get(0).innerText) + (currentSlide == k ? "<b>" : "") + "<span class=\"badge deleter\"></li>");
+        var slideTitle = $(getSlide(k).html).filter('div').get(0);
+        var titleText = slideTitle ? (slideTitle.innerText || slideTitle.textContent) : "Untitled";
+        $('#sL').append("<li class=\"list-item slideCl\" data-slide=\"" + k + "\">" + (currentSlide == k ? "<b>" : "") + titleText + (currentSlide == k ? "</b>" : "") + "<span class=\"badge deleter\"></span></li>");
       }
       $('#currentSlide').text("Slide " + sN2);
       console.log(getSlideList());
@@ -135,7 +137,7 @@
           type: $('#type').val(),
           html: slC
         });
-        var nSKey = nSRef.key();
+        var nSKey = nSRef.key;
         setSlide(nSKey, {
           type: $('#type').val(),
           html: slC

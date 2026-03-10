@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <title>Fire Deck - A free, open-source Pear Deck alternative.</title>
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css" rel="stylesheet">
-  <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400italic,100,700italic,300,700,400' rel='stylesheet' type='text/css'>
-  -->
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="./index.css" rel="stylesheet" />
 </head>
@@ -18,7 +16,7 @@
         <a class="navbar-brand logo" id="logoLink" href="/#">Fire Deck.</a>
       </div>
       <div class="navbar-form navbar-right">
-        <a href="https://github.com/phanegan3/FireDeck" target="_blank" class="btn btn-info">&nbsp;<i class="fa fa-github"></i>&nbsp;</a>
+        <a href="https://github.com/TreeArtist/FireDeck-1" target="_blank" class="btn btn-info">&nbsp;<i class="fa fa-github"></i>&nbsp;</a>
         <span id="tLBtn" onclick="tauth()" class="btn btn-danger">Teacher Login</span>
         <span id="sLBtn" onclick="sauth()" class="btn btn-success">Student Login</span>
       </div>
@@ -37,12 +35,21 @@
     </p>
   </div>
 </body>
-<script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script>
-  var ref = new Firebase("https://firedeck.firebaseio.com/");
-  var fb = new Firebase("https://firedeck.firebaseio.com/");
+  var firebaseConfig = {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "firedeck.firebaseapp.com",
+    databaseURL: "https://firedeck.firebaseio.com",
+    projectId: "firedeck"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var fb = firebase.database().ref();
+  var ref = fb;
 </script>
-<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="uiQuirks.js"></script>
 <script src="./index.js"></script>
