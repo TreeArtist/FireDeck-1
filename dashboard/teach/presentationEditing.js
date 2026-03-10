@@ -92,7 +92,7 @@
       $('#sL').html("");
       for (var k in getSlideList()) {
         var slideTitle = $(getSlide(k).html).filter('div').get(0);
-        var titleText = slideTitle ? (slideTitle.innerText || slideTitle.textContent) : "Untitled";
+        var titleText = slideTitle ? $('<span>').text(slideTitle.innerText || slideTitle.textContent || 'Untitled').html() : "Untitled";
         $('#sL').append("<li class=\"list-item slideCl\" data-slide=\"" + k + "\">" + (currentSlide == k ? "<b>" : "") + titleText + (currentSlide == k ? "</b>" : "") + "<span class=\"badge deleter\"></span></li>");
       }
       $('#currentSlide').text("Slide " + sN2);

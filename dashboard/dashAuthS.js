@@ -21,7 +21,7 @@
     //Username behaviour
     var userDataPath = firebase.database().ref("users").child(user.uid);
     userDataPath.once("value", function(snap) {
-      userData = snap.val();
+      var userData = snap.val();
     });
   });
 })();
