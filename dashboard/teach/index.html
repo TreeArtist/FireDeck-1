@@ -19,7 +19,7 @@
         <a class="navbar-brand logo" href="/#">Fire Deck.</a>
       </div>
       <div class="navbar-form navbar-right">
-        <a href="http://github.com/qsysmine/firedeck" target="_blank" class="btn btn-info">&nbsp;<i class="fa fa-github"></i>
+        <a href="https://github.com/TreeArtist/FireDeck-1" target="_blank" class="btn btn-info">&nbsp;<i class="fa fa-github"></i>
           &nbsp;
         </a>
         <a href="./present#" class="btn btn-success" id="presentBtn" disabled>Present</a>
@@ -157,12 +157,20 @@
   </div>
 </body>
 <script src="/quill.min.js"></script>
-<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
-<script src="https://cdn.rawgit.com/mrsharpoblunto/foswig.js/master/dist/foswig.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script>
-  var fb = new Firebase("https://firedeck.firebaseio.com");
+  var firebaseConfig = {
+    apiKey: "YOUR_FIREBASE_API_KEY",
+    authDomain: "firedeck.firebaseapp.com",
+    databaseURL: "https://firedeck.firebaseio.com",
+    projectId: "firedeck"
+  };
+  firebase.initializeApp(firebaseConfig);
+  var fb = firebase.database().ref();
   var quill = new Quill('#editor');
   quill.addModule('toolbar', {
     container: '#toolbar'
@@ -170,7 +178,6 @@
 </script>
 <script src="../../uiQuirks.js"></script>
 <script src="../dashAuth.js"></script>
-<script src="https://code.ospry.io/v1/ospry.js"></script>
 <script src="./presentationEditing.js"></script>
 <script src="./index.js"></script>
 <script src="../../qEditWrap.js"></script>

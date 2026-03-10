@@ -1,109 +1,28 @@
-(function() {
-  //The dictionary for Foswig.js
-  var foswigDict = [
-    "glove",
-    "box",
-    "basket",
-    "death",
-    "quick",
-    "fast",
-    "slow",
-    "deadly",
-    "deathly",
-    "orange",
-    "red",
-    "blue",
-    "purple",
-    "purpleish",
-    "florange",
-    "gulp",
-    "parade",
-    "pardon",
-    "banner",
-    "bork",
-    "nope",
-    "timely",
-    "time",
-    "timed",
-    "timer",
-    "thyme",
-    "thymer",
-    "thymely",
-    "selfie",
-    "selfos",
-    "selfette",
-    "britain",
-    "scotland",
-    "wales",
-    "abraham",
-    "lincoln",
-    "colbert",
-    "stephen",
-    "fire",
-    "fired",
-    "firebase",
-    "encyclopædia",
-    "coffee",
-    "tea",
-    "tee",
-    "teehee",
-    "thee",
-    "thou",
-    "thine",
-    "spaghetti",
-    "foswig",
-    "sontaran",
-    "dalek",
-    "doctor",
-    "river",
-    "rory",
-    "oswin",
-    "typeface",
-    "font",
-    "fontfont",
-    "montserrat",
-    "roboto",
-    "robotica",
-    "public",
-    "npr",
-    "private",
-    "goldstein",
-    "shulmeric",
-    "davidson",
-    "thisAmerican",
-    "derp",
-    "narf",
-    "tonight",
-    "creepy",
-    "awkward",
-    "alien",
-    "Greek",
-    "German",
-    "Russian",
-    "exaggeration",
-    "exaggerated",
-    "conclusion",
-    "Final",
-    "Cut",
-    "Pro",
-    "Final Cut",
-    "decision",
-    "business",
-    "Buckley",
-    "Dose",
-    "death",
-    "Republic",
-    "Democracy",
-    "Hierarchy",
-    "Hierarchical"
+(function () {
+  var adjectives = [
+    'amber', 'azure', 'bold', 'brave', 'bright', 'calm', 'clear', 'cool',
+    'crisp', 'deep', 'eager', 'fast', 'fine', 'firm', 'free', 'fresh',
+    'glad', 'gold', 'grand', 'great', 'keen', 'kind', 'light', 'lush',
+    'mild', 'neat', 'new', 'nice', 'open', 'proud', 'pure', 'quick',
+    'quiet', 'rapid', 'rich', 'sage', 'sharp', 'shiny', 'sleek', 'smart',
+    'soft', 'sure', 'swift', 'tall', 'true', 'vivid', 'warm', 'wide',
+    'wise', 'young'
   ];
-  var chain = new Foswig(1);
-  chain.addWordsToChain(foswigDict);
+  var nouns = [
+    'arch', 'blade', 'bloom', 'bolt', 'brook', 'brush', 'chain', 'cloud',
+    'coast', 'comet', 'crest', 'crown', 'dawn', 'deck', 'drift', 'dune',
+    'ember', 'field', 'flame', 'flash', 'fleet', 'flint', 'flow', 'forge',
+    'frost', 'gale', 'gate', 'glow', 'grove', 'haze', 'horn', 'isle',
+    'jade', 'lake', 'lark', 'leaf', 'light', 'lodge', 'mist', 'peak',
+    'pine', 'reef', 'ridge', 'river', 'rock', 'rose', 'sand', 'shore',
+    'sky', 'slide', 'spark', 'star', 'storm', 'stream', 'sun', 'tide',
+    'trail', 'vale', 'vine', 'wave'
+  ];
 
-  function cFL(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-  window.makeName = function() {
-    return chain.generateWord(4, 15, true) + cFL(chain.generateWord(5, 15, false));
+  window.makeName = function () {
+    var adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+    var noun = nouns[Math.floor(Math.random() * nouns.length)];
+    var num = Math.floor(Math.random() * 900) + 100;
+    return adj + '-' + noun + '-' + num;
   };
 })();
